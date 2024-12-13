@@ -90,3 +90,11 @@
                              :=color :rideable-type
                              :=mark-opacity 0.8}))
 
+
+
+;; Distribution of trips by types of bikes
+(-> clean-trips
+    (tc/group-by [:rideable-type])
+    (tc/aggregate {:n tc/row-count})
+    (plotly/layer-bar {:=x :rideable-type
+                       :=y :n}))
